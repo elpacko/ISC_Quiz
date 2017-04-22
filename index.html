@@ -55,14 +55,23 @@
          </div>
          
          
-         <div class="row" id='resultadoDiv'>
+         <div class="row" id='resultadoDiv' >
            <div class="col-md-12">
          <div class="panel panel-primary">
                <div class="panel-heading">
-                 <h3 class="panel-title">Panel title</h3>
+                 <h3 class="panel-title">Eres...</h3>
                </div>
                <div class="panel-body">
-                 Panel content
+                 <div id='queProfeDiv'></div>
+                 <div class="col-sm-4">
+                  <ul class="list-group">
+                    <li class="list-group-item"><img id ='genio4' src='img/4.png'></li>
+                    <li class="list-group-item"><img id ='genio3' src='img/3.png'></li>
+                    <li class="list-group-item"><img id ='genio2' src='img/2.png'></li>
+                    <li class="list-group-item"><img id ='genio1' src='img/1.png'></li>
+                  </ul>
+                </div>
+                 <button  onclick="initPreguntas()" type="button" class="btn btn-lg btn-primary">OK, de nuevo</button>
                </div>
              </div>
            </div>
@@ -224,6 +233,24 @@
            $("#respuesta"+(i+1)).html(preguntas[preguntaNumero].Respuestas[i].Respuesta);
          }
        }
+       function calificacionAGrado(score) {
+         
+           if(score<52){
+             if(score<36){
+               if(score>16){
+                 
+                   return 1;
+                  
+               }else{
+                 return 2;
+               }
+             }else{
+               return 3;
+             }  
+           }else{
+             return 4;
+           }
+       }
         function whatProf(score) {
           if(score<52){
             if(score<36){
@@ -254,8 +281,21 @@
             loadPregunta(currentPregunta);
         }
         function loadResultado() {
-          alert('eres:'+whatProf(usuarioCalificacion));
-          initPreguntas();
+          $('#resultadoDiv').show();
+          $('#preguntasDiv').hide();
+          
+          $("#queProfeDiv").html('Con una calificacion de:<b>'+usuarioCalificacion
+          +'</b><br/>Eres:<br/><h3>'+whatProf(usuarioCalificacion)+'</h3><br/>');
+          
+          for (var i = 1; i < 5; i++) {
+            var opacityValue = 0.3;
+            if(i==calificacionAGrado(usuarioCalificacion))
+            {
+              opacityValue = 1.0;
+            }
+             $('#genio'+i).stop().animate({ opacity: opacityValue }, 800);
+          }
+          
         }
         function loadNextPregunta() {
           
