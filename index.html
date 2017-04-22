@@ -42,29 +42,31 @@
         <h1>Preguntas:</h1>
       </div>
    
-      <div class="col-md-12">
+      <div class="col-md-12" id='preguntasDiv'>
            <div class="list-group">
-             <a href="#" class="list-group-item active">
+             <a href="#" class="list-group-item active" id="preguntaTitulo">
                Pregunta
              </a>
-             <a href="#" class="list-group-item">Respuesta1</a>
-             <a href="#" class="list-group-item">Respuesta1</a>
-             <a href="#" class="list-group-item">Respuesta1</a>
-             <a href="#" class="list-group-item">Respuesta1</a>
+             <a href="#" class="list-group-item" id="respuesta1" onclick="respondio(1);" >Respuesta1</a>
+             <a href="#" class="list-group-item" id="respuesta2" onclick="respondio(2);">Respuesta1</a>
+             <a href="#" class="list-group-item" id="respuesta3" onclick="respondio(3);">Respuesta1</a>
+             <a href="#" class="list-group-item" id="respuesta4" onclick="respondio(4);">Respuesta1</a>
            </div>
          </div>
-         <div class="row">
+         
+         
+         <div class="row" id='resultadoDiv'>
            <div class="col-md-12">
          <div class="panel panel-primary">
-                     <div class="panel-heading">
-                       <h3 class="panel-title">Panel title</h3>
-                     </div>
-                     <div class="panel-body">
-                       Panel content
-                     </div>
-                   </div>
-                 </div>
+               <div class="panel-heading">
+                 <h3 class="panel-title">Panel title</h3>
                </div>
+               <div class="panel-body">
+                 Panel content
+               </div>
+             </div>
+           </div>
+         </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -73,11 +75,159 @@
     <script src="js/bootstrap.min.js"></script>
           <script>
     
-       
+    var usuarioCalificacion = 0;
+    var currentPregunta = 0;
+       var preguntas = 
+         [
+           {
+             "Pregunta":"Cuantos bits tiene un Byte"
+             ,"Respuestas":[
+               {"Respuesta":"2","Valor":1},
+               {"Respuesta":"64","Valor":2},
+               {"Respuesta":"8","Valor":4},
+               {"Respuesta":"16","Valor":3}
+             ]
+           },
+           {
+             "Pregunta":"Para que sirve el compilador"
+             ,"Respuestas":[
+               {"Respuesta":"Para traducir lenguaje maquina a bits","Valor":3},
+               {"Respuesta":"Para traducir de lenguaje de programacion a maquina","Valor":4},
+               {"Respuesta":"Para arreglar el codigo","Valor":2},
+               {"Respuesta":"Para introducir variables al ambiente","Valor":1}
+             ]
+           },
+           {
+             "Pregunta":"Cuantos Megabytes hay en un Terabyte"
+             ,"Respuestas":[
+               {"Respuesta":"1000000","Valor":4},
+               {"Respuesta":"250","Valor":1},
+               {"Respuesta":"1024","Valor":2},
+               {"Respuesta":"10000000000","Valor":3}
+               
+             ]
+           },
+           {
+             "Pregunta":"Donde se guarda el codigo fuente"
+             ,"Respuestas":[
+               {"Respuesta":"En la RAM","Valor":3},
+               {"Respuesta":"En el Disco Duro","Valor":4},
+               {"Respuesta":"En el procesador","Valor":2},
+               {"Respuesta":"En el USB","Valor":1}
+             ]
+           },
+           {
+             "Pregunta":"Que es un registro"
+             ,"Respuestas":[
+               {"Respuesta":"Es donde se va el agua sucia","Valor":1},
+               {"Respuesta":"Es el switch de el CPU para prender el reloj","Valor":2},
+               {"Respuesta":"Es una parte del CPU para guardar cosas","Valor":4},
+               {"Respuesta":"Es parte de el CPU que calcula operaciones matematicas","Valor":3}
+             ]
+           },
+           {
+             "Pregunta":"Hotel?"
+             ,"Respuestas":[
+               {"Respuesta":"Trivago","Valor":3},
+               {"Respuesta":"H=j*2","Valor":1},
+               {"Respuesta":"El doble de j","Valor":1},
+               {"Respuesta":"California","Valor":3}
+             ]
+           },
+           {
+             "Pregunta":"Que parte del CPU procesa las operaciones aritmeticas"
+             ,"Respuestas":[
+               {"Respuesta":"ARM","Valor":3},
+               {"Respuesta":"ALU","Valor":4},
+               {"Respuesta":"El coprocesador matematico","Valor":4},
+               {"Respuesta":"CPU Aritmetrix","Valor":1}
+             ]
+           },   
+           {
+                "Pregunta":"Sistema operativo parte de GNU"
+                ,"Respuestas":[
+                  {"Respuesta":"Solaris","Valor":3},
+                  {"Respuesta":"Linux","Valor":4},
+                  {"Respuesta":"OSX","Valor":2},
+                  {"Respuesta":"Windows","Valor":1}
+                ]
+              },   {
+             "Pregunta":"Donde esta el ECC"
+             ,"Respuestas":[
+               {"Respuesta":"RAM","Valor":4},
+               {"Respuesta":"CPU","Valor":3},
+               {"Respuesta":"HTML","Valor":1},
+               {"Respuesta":"ALU","Valor":2}
+             ]
+           },   {
+                "Pregunta":"Que protocolo sirve para transferir archivos"
+                ,"Respuestas":[
+                  {"Respuesta":"HTML","Valor":2},
+                  {"Respuesta":"FTP","Valor":4},
+                  {"Respuesta":"HTTP","Valor":3},
+                  {"Respuesta":"VML","Valor":1}
+                ]
+              },
+              {
+                "Pregunta":"Que pasa si el procesador no tiene una instruccion siguiente"
+                ,"Respuestas":[
+                  {"Respuesta":"Se quema","Valor":1},
+                  
+                  {"Respuesta":"Error de Windows","Valor":2},
+                  {"Respuesta":"HALT","Valor":4},
+                  {"Respuesta":"Se reinicia","Valor":3}
+                ]
+              },
+              {
+                "Pregunta":"Cual es la velocidad maxima aproximada conocida de un CPU comerical"
+                ,"Respuestas":[
+                  {"Respuesta":"4000000000 hertz","Valor":4},
+                  {"Respuesta":"7000 Megahertz","Valor":3},
+                  {"Respuesta":"0.5 Gigawats","Valor":1},
+                  {"Respuesta":"4 Gigavolts","Valor":2}
+                ]
+              },
+              {
+                "Pregunta":"Le diste click rapido a todas las preguntas"
+                ,"Respuestas":[
+                  {"Respuesta":"Si","Valor":1},
+                  {"Respuesta":"Por Supuesto","Valor":3},
+                  {"Respuesta":"No","Valor":4},
+                  {"Respuesta":"eh","Valor":2}
+                ]
+              },
+              {
+                "Pregunta":"Cual metodo de desarollo de proyectos de sw es valido?"
+                ,"Respuestas":[
+                  {"Respuesta":"Waterfall","Valor":4},
+                  {"Respuesta":"Project Management","Valor":1},
+                  {"Respuesta":"ITIL","Valor":1},
+                  {"Respuesta":"Kan Ban","Valor":2}
+                ]
+              },
+              {
+                "Pregunta":"Cual no es una bandera valida del ALU"
+                ,"Respuestas":[
+                  {"Respuesta":"ZERO","Valor":2},
+                  {"Respuesta":"TRUE","Valor":4},
+                  {"Respuesta":"CARRY","Valor":1},
+                  {"Respuesta":"OVERFLOW","Valor":3}
+                ]
+              }
+            
+         ]
+         
+       ;
+       function loadPregunta(preguntaNumero) {
+         $("#preguntaTitulo").html("<b>"+(preguntaNumero+1)+"</b>: "+preguntas[preguntaNumero].Pregunta);
+         for (var i = 0; i < 5; i++) {
+           $("#respuesta"+(i+1)).html(preguntas[preguntaNumero].Respuestas[i].Respuesta);
+         }
+       }
         function whatProf(score) {
-          if(score<13){
-            if(score<9){
-              if(score>4){
+          if(score<52){
+            if(score<36){
+              if(score>16){
                 
                   return "Cor Chado";
                  
@@ -91,6 +241,36 @@
             return "Y-Barra";
           }
         }
+        function respondio(respuesta) {
+          usuarioCalificacion +=preguntas[currentPregunta].Respuestas[(respuesta-1)].Valor;
+          loadNextPregunta();
+          
+        }
+        function initPreguntas(){
+            $('#resultadoDiv').hide();
+            $('#preguntasDiv').show();
+            currentPregunta=0;
+            usuarioCalificacion=0;
+            loadPregunta(currentPregunta);
+        }
+        function loadResultado() {
+          alert('eres:'+whatProf(usuarioCalificacion));
+          initPreguntas();
+        }
+        function loadNextPregunta() {
+          
+          currentPregunta++;
+          
+          if(currentPregunta<preguntas.length)
+          {
+            loadPregunta(currentPregunta);
+          }
+          else {
+            loadResultado();
+          }
+          
+        }
+        initPreguntas();
         //$('#test').html( testProf());
         //document.getElementById('test').innerHTML = testProf();
     </script>
