@@ -89,7 +89,7 @@
        var preguntas = 
          [
            {
-             "Pregunta":"Cuantos bits tiene un Byte"
+             "Pregunta":"¿Cuántos bits tiene un Byte?"
              ,"Respuestas":[
                {"Respuesta":"2","Valor":1},
                {"Respuesta":"64","Valor":2},
@@ -269,7 +269,7 @@
           }
         }
         function respondio(respuesta) {
-          usuarioCalificacion +=preguntas[currentPregunta].Respuestas[(respuesta-1)].Valor;
+          usuarioCalificacion += preguntas[currentPregunta].Respuestas[(respuesta-1)].Valor;
           loadNextPregunta();
           
         }
@@ -284,8 +284,8 @@
           $('#resultadoDiv').show();
           $('#preguntasDiv').hide();
           
-          $("#queProfeDiv").html('Con una calificacion de:<b>'+usuarioCalificacion
-          +'</b><br/>Eres:<br/><h3>'+whatProf(usuarioCalificacion)+'</h3><br/>');
+          $("#queProfeDiv").html('Tu Calificación es:<b>'+usuarioCalificacion
+          +' de 60</b><br/>Eres:<br/><h3>'+whatProf(usuarioCalificacion)+'</h3><br/>');
           
           for (var i = 1; i < 5; i++) {
             var opacityValue = 0.3;
